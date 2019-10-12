@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class HttpRequest {
     constructor () {
-        this.baseUrl = '/'
+        this.baseUrl = '/api'
         this.queue = {}
     }
     getInsideConfig () {

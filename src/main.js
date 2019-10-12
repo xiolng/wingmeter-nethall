@@ -14,7 +14,7 @@ import VueWechatTitle from 'vue-wechat-title'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 Vue.use(Vant)
 Vue.use(VueWechatTitle)

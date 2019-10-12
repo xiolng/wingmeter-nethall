@@ -1,12 +1,10 @@
-export default (axios) => {
-    return {
-        gets: axios.request({
-            url: '/www',
-            method: 'get',
-            params: {
-                aa:11,
-                bb:22
-            }
-        })
-    }
+import axios from './axios'
+
+export const gets = (params) => {
+    return axios.request({
+        url: '/www',
+        method: 'get',
+        params
+    })
+
 }
