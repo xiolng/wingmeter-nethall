@@ -1,0 +1,76 @@
+@colorName: white,
+orange,
+red,
+paleYellow,
+paleBlue;
+@colorList: #fff,
+#f60,
+#d60909d9,
+#fff5dc,
+#56b1fc;
+//color  background
+.generate-color(@n,@i: length(@colorList),@name: extract(@colorName,@n)) when (@n =< @i) {
+  .@{name} {
+    color: extract(@colorList, @n);
+  }
+  .@{name}_bg {
+    background: extract(@colorList, @n);
+  }
+  .generate-color((@n+1), @i)
+}
+
+//border
+.generate-border(@n,@color,@names,@i: 4) when (@n =< @i) {
+  .br_@{names}_@{n} {
+    border: 1px solid @color;
+  }
+  .brt_@{names}_@{n} {
+    border-top: 1px solid @color;
+  }
+  .brr_@{names}_@{n} {
+    border-right: 1px solid @color;
+  }
+  .brb_@{names}_@{n} {
+    border-bottom: 1px solid @color;
+  }
+  .brl_@{names}_@{n} {
+    border-left: 1px solid @color;
+  }
+  .generate-border((@n+1), @color, @names, @i)
+}
+
+
+//margin  padding
+.generate-mp(@n, @i: 0) when (@i =< @n) {
+  .p_@{i} {
+    padding: @i + 0px;
+  }
+  .pt_@{i} {
+    padding-top: @i + 0px;
+  }
+  .pr_@{i} {
+    padding-right: @i + 0px;
+  }
+  .pb_@{i} {
+    padding-bottom: @i + 0px;
+  }
+  .pl_@{i} {
+    padding-left: @i + 0px;
+  }
+  .m_@{i} {
+    margin: @i + 0px;
+  }
+  .mt_@{i} {
+    margin-top: @i + 0px;
+  }
+  .mr_@{i} {
+    margin-right: @i + 0px;
+  }
+  .mb_@{i} {
+    margin-bottom: @i + 0px;
+  }
+  .ml_@{i} {
+    margin-left: @i + 0px;
+  }
+  .generate-mp(@n, (@i+10));
+}

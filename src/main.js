@@ -14,13 +14,13 @@ import VueWechatTitle from 'vue-wechat-title'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 
-Vue.config.productionTip = true
+Vue.config.productionTip = process.env.NODE_ENV === 'development'
 
 Vue.use(Vant)
 Vue.use(VueWechatTitle)
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount('#app')

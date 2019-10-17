@@ -1,6 +1,105 @@
-html{
+@import "mixin";
+
+html {
   color: #666;
 }
-h1,h2,h3,h4,h5,h6,div,span,p,i,li,a{
-  font-size: 12px;
+
+h1, h2, h3, h4, h5, h6, div, span, p, i, li, a {
+  font-size: 14px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.clearfix:before {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+//要显示多少行
+.ellipsis-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+//flot
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+//text-align
+.tl {
+  text-align: left;
+}
+
+.tr {
+  text-align: right;
+}
+
+.tc {
+  text-align: center;
+}
+
+//position
+.pr {
+  position: relative;
+}
+
+.pa {
+  position: absolute;
+}
+
+.pf {
+  position: fixed;
+}
+//提示文字颜色
+.tips{
+  color: #888;
+}
+//overflow
+.oh{
+  overflow: hidden;
+}
+.ov{
+  overflow: visible;
+}
+.br_radius{
+  border-radius: 10px;
+}
+
+//color
+.generate-color(1);
+
+//margin padding
+.generate-mp(60);
+//border
+.generate-border(1,#ccc, gray);
+.generate-border(1,#fff, white);
+.generate-border(1,#f60, orange);
+
