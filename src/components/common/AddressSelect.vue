@@ -24,6 +24,7 @@
       }
     },
     mounted() {
+      console.log(4444);
       this.list = this.setAddress(this.areaList)
     },
     methods: {

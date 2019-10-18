@@ -1,51 +1,48 @@
 <template>
-  <div>
-    <van-popup v-model="shows" position="left" @click-overlay="closedPop"
-               get-container="body">
-      <div class="set_meal_box">
-        <div class="img_box">
-          <img style="width: 100%;" src="../../assets/tianyi.png" alt="">
-        </div>
-        <div class="p_10">请选择套餐</div>
-        <div class="item_box">
-          <div class="setMealItem" :class="[(item.id === checkItem.id) ? 'br_orange_1':'br_gray_1']"  v-for="item in listData" :key="item.id" @click="checkItem = item">
-            <span>{{item.packageName}}</span>
-            <div class="cir_tip" v-show="item.id === checkItem.id">
-              <van-icon name="success" class="orange"></van-icon>
-            </div>
+  <van-popup v-model="show" position="bottom" @click-overlay="closedPop"
+             get-container="body">
+    <div class="set_meal_box">
+      <div class="img_box">
+        <img style="width: 100%;" src="../../assets/tianyi.png" alt="">
+      </div>
+      <div class="p_10">请选择套餐</div>
+      <div class="item_box">
+        <div class="setMealItem" :class="[(item.id === checkItem.id) ? 'br_orange_1':'br_gray_1']"  v-for="item in listData" :key="item.id" @click="checkItem = item">
+          <span>{{item.packageName}}</span>
+          <div class="cir_tip" v-show="item.id === checkItem.id">
+            <van-icon name="success" class="orange"></van-icon>
           </div>
         </div>
-        <div class="p_10">卡号类型</div>
-        <div class="item_box">
-          <div class="setMealItem br_orange_1 typeItem">
-            <span>{{checkItem.cardSizeType === 2 ? '4G Nano卡':'其它'}}</span>
-            <div class="cir_tip">
-              <van-icon name="success" class="orange"></van-icon>
-            </div>
+      </div>
+      <div class="p_10">卡号类型</div>
+      <div class="item_box">
+        <div class="setMealItem br_orange_1 typeItem">
+          <span>{{checkItem.cardSizeType === 2 ? '4G Nano卡':'其它'}}</span>
+          <div class="cir_tip">
+            <van-icon name="success" class="orange"></van-icon>
           </div>
         </div>
-        <!--套餐详情-->
-        <div class="detail_box">
-          <van-tabs background="#fbf5f5">
-            <van-tab v-for="(item, index) in detailItems" :key="index" :title="item.title">
-              <div class="pt_10">
-                <div v-for="(list, inx) in splitDetail(checkItem[item.name])" :key="inx" v-if="checkItem[item.name]" class="p_10">
-                  {{list}}
-                </div>
+      </div>
+      <!--套餐详情-->
+      <div class="detail_box">
+        <van-tabs background="#fbf5f5">
+          <van-tab v-for="(item, index) in detailItems" :key="index" :title="item.title">
+            <div class="pt_10">
+              <div v-for="(list, inx) in splitDetail(checkItem[item.name])" :key="inx" v-if="checkItem[item.name]" class="p_10">
+                {{list}}
               </div>
-            </van-tab>
-          </van-tabs>
-        </div>
+            </div>
+          </van-tab>
+        </van-tabs>
       </div>
-      <div class="p_20">
-        <van-button type="warning" :loading="false" @click="saveMeal(checkItem), closedPop()" block>
-          确认选择
-        </van-button>
-      </div>
+    </div>
+    <div class="mealSubmit">
+      <van-button type="warning" :loading="false" @click="saveMeal(checkItem), closedPop()" block>
+        确认选择
+      </van-button>
+    </div>
 
-    </van-popup>
-
-  </div>
+  </van-popup>
 </template>
 
 <script>
@@ -58,7 +55,6 @@
     },
     data() {
       return {
-        shows: !!this.show,
         listData: [],
         checkItem: '',
         detailItems: [
@@ -87,7 +83,7 @@
 .set_meal_box{
   min-height: 100vh;
   background: #fff;
-  padding: 10px;
+  padding: 10px 10px 80px;
 }
   .setMealItem{
     width: 45%;
@@ -113,5 +109,14 @@
   }
   .detail_box{
     padding-top: 30px;
+  }
+  .mealSubmit{
+    background: #fff;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
   }
 </style>

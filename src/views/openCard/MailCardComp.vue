@@ -48,28 +48,30 @@
       placeholder="请选择套餐"
       label="选择套餐"
       required
+      disabled
       @click="showSetMeal = !showSetMeal"
     ></van-field>
     <van-field
       placeholder="请选择号码"
       label="选择号码"
       required
-      @click="showSetMeal = !showSetMeal"
+      disabled
+      @click="showMobile = !showMobile"
     ></van-field>
-    <div class="pl_10">
+    <div class="p_10 brb_gray_1">
       <van-row type="flex" align="center">
         <van-col span="6">开卡角色</van-col>
         <van-col span="18">
-          <van-row type="flex" justify="space-around">
-            <van-col>
-              <van-icon color="#56b1fc" name="circle" size="16px"></van-icon>
-              <span> 商户开卡 </span>
-            </van-col>
-            <van-col>
-              <van-icon name="circle" size="16px"></van-icon>
-              <span> 客户经理开卡 </span>
-            </van-col>
-          </van-row>
+          <van-radio-group v-model="radio">
+            <van-row type="flex" justify="space-around">
+              <van-col>
+                <van-radio name="1" icon-size="16" disabled>商户开卡</van-radio>
+              </van-col>
+              <van-col>
+                <van-radio name="2" icon-size="16" disabled>客户经理开卡</van-radio>
+              </van-col>
+            </van-row>
+          </van-radio-group>
         </van-col>
       </van-row>
     </div>
@@ -83,20 +85,28 @@
     <van-field
       placeholder="请选择区域"
       label="所在区域"
+      disabled
       required
-      @click="showSetMeal = !showSetMeal"
+      @click="showAddress = !showAddress"
     ></van-field>
     <van-field
       placeholder="街道/镇+村/小区/写字楼+门牌号"
       label="详细地址"
     ></van-field>
 
-    <SelectSetMeal :show="showSetMeal" :closed="closedSetMeal" :save-meal="getMeal" v-if="showSetMeal"></SelectSetMeal>
+    <SelectSetMeal :show="showSetMeal" :closed="closedSetMeal" :save-meal="getMeal"></SelectSetMeal>
+    <SelectMobile :show="showMobile" :closed="closedMobile"></SelectMobile>
+    <AddressSelect :show="showAddress" :area-list="list" :show-num="3" :callback="getArea"
+                   :close-pop="setPop"></AddressSelect>
   </div>
 </template>
 
 <script>
   import SelectSetMeal from "@/views/openCard/SelectSetMeal"; // 选择套餐
+  import SelectMobile from "@/views/openCard/SelectMobile"; //选择手机号
+  import AddressSelect from "_c/common/AddressSelect"; //地址选择
+  import addressList from '../area' // 模拟数据
+  import {Toast} from 'vant'
   export default {
     data() {
       return {
@@ -112,8 +122,11 @@
         },
         verificationTxt: '发送验证码',
         verificationDisabled: false,
-        radio: 1,
-        showSetMeal: false
+        radio: '1',
+        showSetMeal: false,
+        showMobile: false,
+        showAddress: false,
+        list: addressList,
       }
     },
     methods:{
@@ -142,15 +155,27 @@
       closedSetMeal(){
         this.showSetMeal = false
       },
+      closedMobile(){
+        this.showMobile = false
+      },
       getMeal(item){
         console.log(item);
       },
       addIdCard(item){
         console.log(111, item);
+      },
+      getArea(list) {
+        this.showAddress = false
+        this.addressName = list[list.length - 1].name
+      },
+      setPop() {
+        this.showAddress = false
       }
     },
     components:{
-      SelectSetMeal
+      SelectSetMeal,
+      SelectMobile,
+      AddressSelect
     }
   }
 </script>
